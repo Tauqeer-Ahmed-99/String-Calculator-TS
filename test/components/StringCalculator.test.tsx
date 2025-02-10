@@ -36,4 +36,16 @@ describe("String Calculator UI Test Suite", () => {
       false
     );
   });
+
+  it("Should not have Result section visible by default.", () => {
+    render(<StringCalculator />);
+
+    expect(screen.getByTestId("results")).not.toBeInTheDocument();
+  });
+
+  it("Should have visble Result section after clicking Calculate Button.", () => {
+    render(<StringCalculator />);
+
+    expect(screen.getByTestId("results")).not.toBeInTheDocument();
+  });
 });
