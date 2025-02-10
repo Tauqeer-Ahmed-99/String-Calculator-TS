@@ -46,9 +46,39 @@ describe("String Calculator UI Test Suite", () => {
   it("Should have visble Result section after clicking Calculate Button.", () => {
     render(<StringCalculator />);
 
-    const calculateButton = screen.getByText("Calculate");
+    const calculateButton = screen.getByTestId("calculate-btn");
     fireEvent.click(calculateButton);
 
     expect(screen.getByTestId("Result")).toBeInTheDocument();
+  });
+
+  it("Should not have Error section visible by default.", () => {
+    render(<StringCalculator />);
+
+    expect(screen.queryByTestId("Error")).not.toBeInTheDocument();
+  });
+
+  it("Should not have Error section visible if data is correct.", () => {
+    render(<StringCalculator />);
+
+    const inputElement = screen.getByTestId("main-input");
+    fireEvent.change(inputElement, { target: { value: "1,2,3" } });
+
+    const calculateButton = screen.getByTestId("calculate-btn");
+    fireEvent.click(calculateButton);
+
+    expect(screen.queryByTestId("Error")).not.toBeInTheDocument();
+  });
+
+  it("Should have visble Error section after clicking Calculate Button If error is thrown.", () => {
+    render(<StringCalculator />);
+
+    const inputElement = screen.getByTestId("main-input");
+    fireEvent.change(inputElement, { target: { value: "1,2,a" } });
+
+    const calculateButton = screen.getByTestId("calculate-btn");
+    fireEvent.click(calculateButton);
+
+    expect(screen.getByTestId("Error")).toBeInTheDocument();
   });
 });
