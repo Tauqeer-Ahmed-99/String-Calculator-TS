@@ -50,7 +50,7 @@ yarn test  # or npm test
  ├── 📂 utils
  │    ├── helpers.ts  # Core logic for string splitting
  │    ├── math.ts  # core logic for math addition function
- 📂 test
+📂 test
  ├── 📂 components
  │    ├── StringCalculator.test.tsx  # Tests logic for UI component
  ├── 📂 utils
