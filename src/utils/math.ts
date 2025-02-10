@@ -1,4 +1,6 @@
 export const add = (numbers: string) => {
+  if (numbers === "") return 0;
+
   const numbersToAdd = numbers.split(",");
 
   return numbersToAdd.reduce((prevVal, currVal) => {

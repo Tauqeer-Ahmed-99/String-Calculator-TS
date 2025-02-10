@@ -17,4 +17,12 @@ describe("Math Test Suite", () => {
 
     expect(() => add(data)).toThrowError("Given String Contains a NaN value.");
   });
+
+  it("Should return 0 if empty string is provided", () => {
+    const data = "";
+
+    const result = add(data);
+
+    expect(result).toBe(0);
+  });
 });
