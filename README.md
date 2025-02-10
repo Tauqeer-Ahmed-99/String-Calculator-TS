@@ -1,50 +1,84 @@
-# React + TypeScript + Vite
+# String Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+The **String Calculator** is a simple utility that takes a string of numbers separated by delimiters and returns their sum. This project is implemented in **TypeScript** and tested using **Vitest & React Testing Library**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Supports default delimiters: `,` (comma) and `\n` (newline)
+- Allows custom delimiters using the format `//[delimiter]\n`
+- **Extended Version Completed** 🚀
+  - Supports multiple custom delimiters: `//[delim1][delim2]\n`
+  - Ignores numbers greater than `1000`
+  - Handles edge cases like empty strings and negative numbers
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installation
 
-- Configure the top-level `parserOptions` property like this:
+```sh
+# Clone the repository
+git clone https://github.com/your-username/string-calculator.git
+cd string-calculator
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# Install dependencies
+yarn install  # or npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Usage
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Run the application:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```sh
+yarn dev  # or npm run dev
 ```
+
+## Testing
+
+Run the test suite to ensure everything is working as expected:
+
+```sh
+yarn test  # or npm test
+```
+
+## Code Structure
+
+```
+📂 src
+ ├── 📂 components
+ │    ├── StringCalculator.tsx  # UI component
+ │    ├── StringCalculator.test.tsx  # Unit tests
+ ├── 📂 utils
+ │    ├── splitByCustomDelimiters.ts  # Core logic for string splitting
+ │    ├── getUserProvidedDelimiter.ts  # Extracts delimiter from input
+ ├── 📄 App.tsx  # Main app entry point
+```
+
+## Example Inputs & Outputs
+
+| Input                  | Output                       |
+| ---------------------- | ---------------------------- |
+| `"1,2,3"`              | `6`                          |
+| `"1\n2,3"`             | `6`                          |
+| `"//;\n1;2"`           | `3`                          |
+| `"//[***]\n1***2***3"` | `6`                          |
+| `"//[*][%]\n1*2%3"`    | `6`                          |
+| `"1001,2"`             | `2` (ignores numbers > 1000) |
+
+## Extended Version Achievements 🎯
+
+✅ **Multiple Delimiters Supported**: `//[delim1][delim2]\n`
+✅ **Handles Special Characters in Delimiters**
+✅ **Ignores Large Numbers (`>1000`)**
+✅ **Optimized Regular Expressions for Splitting**
+
+## Contributing
+
+Feel free to fork this repo and submit pull requests. Contributions are welcome!
+
+## License
+
+This project is licensed under the **MIT License**.
+
+---
+
+🔥 **Completed all extra challenges!** 🚀
