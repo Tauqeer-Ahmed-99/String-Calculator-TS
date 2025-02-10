@@ -73,4 +73,12 @@ describe("Helper Utils Test Suite", () => {
 
     expect(result).toBe(";");
   });
+
+  it("Should return multicharacter delimiter if initial string has '//'", () => {
+    const input = "//***\n1;3;4";
+
+    const result = getUserProvidedDelimiter(input);
+
+    expect(result).toBe("***");
+  });
 });

@@ -5,9 +5,18 @@ export const splitByCustomDelimiters = (text: string): string[] => {
   const userProvidedDelimiter = getUserProvidedDelimiter(text);
 
   if (userProvidedDelimiter) {
-    text = text.replace(`//${userProvidedDelimiter}`, "");
+    text = text.replace(`//${userProvidedDelimiter}\n`, ""); // remove delimiter with starting chars and linebreak
+
+    // Chars like - ^ $ * + ? . ( ) | [ ] { } has special meanings in reg exp
+    // therefore need to escape them if using as delimiter
+    // Escape special characters in the custom delimiter
+    const escapedDelimiter = userProvidedDelimiter.replace(
+      /[-\/\\^$*+?.()|[\]{}]/g,
+      "\\$&"
+    );
+
     return removeEmptyItems(
-      text.split(new RegExp(DEFAULT_DELIMITERS + "|" + userProvidedDelimiter)) // delimiters are separated with |
+      text.split(new RegExp(DEFAULT_DELIMITERS + "|" + escapedDelimiter)) // delimiters are separated with |
     ) as string[];
   }
 
@@ -17,7 +26,11 @@ export const splitByCustomDelimiters = (text: string): string[] => {
 };
 
 export const getUserProvidedDelimiter = (text: string) => {
-  return text.startsWith("//") ? text.charAt(2) : null; // char after '//' is delimiter
+  const indexOfFirstLineBreak = text.indexOf("\n");
+  // strong assumption: to have multiple char delimiter then first line must always have
+  // delimiter only if starting with // i.e. providing delimeter
+
+  return text.startsWith("//") ? text.slice(2, indexOfFirstLineBreak) : null; // char after '//' is delimiter
 };
 
 export const convertStringNumbersToActualNumbers = (
