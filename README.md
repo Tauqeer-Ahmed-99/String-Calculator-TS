@@ -46,10 +46,16 @@ yarn test  # or npm test
 📂 src
  ├── 📂 components
  │    ├── StringCalculator.tsx  # UI component
- │    ├── StringCalculator.test.tsx  # Unit tests
+ │    ├── DisplayCard.tsx  # UI component
  ├── 📂 utils
- │    ├── splitByCustomDelimiters.ts  # Core logic for string splitting
- │    ├── getUserProvidedDelimiter.ts  # Extracts delimiter from input
+ │    ├── helpers.ts  # Core logic for string splitting
+ │    ├── math.ts  # core logic for math addition function
+ 📂 test
+ ├── 📂 components
+ │    ├── StringCalculator.test.tsx  # Tests logic for UI component
+ ├── 📂 utils
+ │    ├── helpers.test.ts  # Tests logic for string splitting
+ │    ├── math.test.ts  # Tests logic for math addition function
  ├── 📄 App.tsx  # Main app entry point
 ```
 
