@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { add } from "../utils/math";
+import DisplayCard from "./DisplayCard";
 
 const StringCalculator = () => {
   const [input, setInput] = useState("");
   const [result, setResult] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [gradientColors, setGradientColors] = useState(["#001f3f", "#00458b"]);
 
   useEffect(() => {
@@ -14,8 +17,13 @@ const StringCalculator = () => {
   }, []);
 
   const handleCalculate = () => {
-    // Placeholder for calculation logic
-    setResult(0); // Replace with actual calculation
+    try {
+      const result = add(input);
+
+      setResult(result);
+    } catch (error) {
+      setError((error as Error).message);
+    }
   };
 
   return (
@@ -44,22 +52,13 @@ const StringCalculator = () => {
         <button
           data-testid="calculate-btn"
           onClick={handleCalculate}
-          className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
+          className="cursor-pointer w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
           disabled={false}
         >
           Calculate
         </button>
-        {result !== null && (
-          <div
-            data-testid="results"
-            className="mt-6 p-4 bg-black/30 rounded-lg border border-cyan-500 border-opacity-30"
-          >
-            <h2 className="text-2xl font-semibold text-cyan-100 mb-2">
-              Result:
-            </h2>
-            <p className="text-xl text-white">{result}</p>
-          </div>
-        )}
+        {result !== null && <DisplayCard type="Result" data={result} />}
+        {error !== null && <DisplayCard type="Error" data={error} />}
       </div>
     </div>
   );
