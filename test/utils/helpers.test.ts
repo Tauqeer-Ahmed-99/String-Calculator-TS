@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import {
   convertStringNumbersToActualNumbers,
   getUserProvidedDelimiter,
-  removeEmptyChars,
+  removeEmptyItems,
+  removeRestrictedNumbers,
   splitByCustomDelimiters,
 } from "../../src/utils/helpers";
 
@@ -31,18 +32,26 @@ describe("Helper Utils Test Suite", () => {
     );
   });
 
-  it("Should throw an Error if string array contains negative numeric value char", () => {
-    const input = ["1", "2", "-3", "-4"];
+  it("Should throw an Error if array contains negative numbers", () => {
+    const input = [1, 2, -3, -4];
 
-    expect(() => convertStringNumbersToActualNumbers(input)).toThrowError(
+    expect(() => removeRestrictedNumbers(input)).toThrowError(
       "Negative numbers are not allowed '-3, -4'."
     );
+  });
+
+  it("Should silently remove numbers greater than 1000 or default_max_number", () => {
+    const input = [1, 2, 1000, 1001];
+
+    const result = removeRestrictedNumbers(input);
+
+    expect(result).toEqual([1, 2, 1000]);
   });
 
   it("Should remove empty chars from an array", () => {
     const input = ["1", "", "2"];
 
-    const result = removeEmptyChars(input);
+    const result = removeEmptyItems(input);
 
     expect(result).toEqual(["1", "2"]);
   });

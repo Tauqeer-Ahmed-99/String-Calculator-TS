@@ -1,5 +1,6 @@
 import {
   convertStringNumbersToActualNumbers,
+  removeRestrictedNumbers,
   splitByCustomDelimiters,
 } from "./helpers";
 
@@ -10,5 +11,7 @@ export const add = (numbers: string) => {
 
   const actualNumbers = convertStringNumbersToActualNumbers(stringNumsToAdd);
 
-  return actualNumbers.reduce((prevVal, currVal) => prevVal + currVal, 0);
+  const numbersbetweenRange = removeRestrictedNumbers(actualNumbers);
+
+  return numbersbetweenRange.reduce((prevVal, currVal) => prevVal + currVal, 0);
 };

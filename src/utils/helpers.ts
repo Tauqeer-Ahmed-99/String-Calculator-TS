@@ -1,29 +1,28 @@
-export const splitByCustomDelimiters = (text: string) => {
-  const delimiters = ",|\n";
+export const DEFAULT_DELIMITERS = ",|\n";
+export const MAX_NUMBER = 1000;
 
+export const splitByCustomDelimiters = (text: string): string[] => {
   const userProvidedDelimiter = getUserProvidedDelimiter(text);
 
   if (userProvidedDelimiter) {
     text = text.replace(`//${userProvidedDelimiter}`, "");
-    return removeEmptyChars(
-      text.split(new RegExp(delimiters + "|" + userProvidedDelimiter)) // delimiters are separated with |
-    );
+    return removeEmptyItems(
+      text.split(new RegExp(DEFAULT_DELIMITERS + "|" + userProvidedDelimiter)) // delimiters are separated with |
+    ) as string[];
   }
 
-  return removeEmptyChars(text.split(new RegExp(delimiters)));
-};
-
-export const removeEmptyChars = (strNumArr: string[]) => {
-  return strNumArr.filter((strNum) => strNum);
+  return removeEmptyItems(
+    text.split(new RegExp(DEFAULT_DELIMITERS))
+  ) as string[];
 };
 
 export const getUserProvidedDelimiter = (text: string) => {
   return text.startsWith("//") ? text.charAt(2) : null; // char after '//' is delimiter
 };
 
-export const convertStringNumbersToActualNumbers = (numbers: string[]) => {
-  const numsSmallerThanZero: number[] = [];
-
+export const convertStringNumbersToActualNumbers = (
+  numbers: string[]
+): number[] => {
   const actualNumbers = numbers.map((strNum) => {
     const number = parseInt(strNum.trim());
 
@@ -31,11 +30,25 @@ export const convertStringNumbersToActualNumbers = (numbers: string[]) => {
       throw new Error(`Given String Contains a NaN value '${strNum}'.`);
     }
 
-    if (number < 0) {
-      numsSmallerThanZero.push(number);
+    return number;
+  });
+
+  return removeEmptyItems(actualNumbers) as number[];
+};
+
+export const removeRestrictedNumbers = (numbers: number[]): number[] => {
+  const numsSmallerThanZero: number[] = [];
+
+  const actualNumbers = numbers.map((num) => {
+    if (num < 0) {
+      numsSmallerThanZero.push(num);
     }
 
-    return number;
+    if (num > MAX_NUMBER) {
+      return null;
+    }
+
+    return num;
   });
 
   if (numsSmallerThanZero.length > 0) {
@@ -44,5 +57,9 @@ export const convertStringNumbersToActualNumbers = (numbers: string[]) => {
     );
   }
 
-  return actualNumbers;
+  return removeEmptyItems(actualNumbers) as number[];
+};
+
+export const removeEmptyItems = (strNumArr: unknown[]) => {
+  return strNumArr.filter((strNum) => strNum);
 };
