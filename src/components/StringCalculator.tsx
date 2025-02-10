@@ -33,7 +33,6 @@ const StringCalculator = () => {
       className="min-h-screen flex flex-col items-center justify-center p-4"
       style={{
         background: `linear-gradient(to bottom right, ${gradientColors[0]}, ${gradientColors[1]})`,
-        transition: "background 3s ease",
       }}
     >
       <h1
