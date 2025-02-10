@@ -38,7 +38,7 @@ const StringCalculator = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="w-full px-4 py-2 rounded-lg mb-4 text-lg bg-black bg-opacity-30 text-white placeholder-cyan-200 placeholder-opacity-70 border border-cyan-500 border-opacity-30 focus:outline-none focus:border-opacity-100"
+          className="w-full px-4 py-2 rounded-lg mb-4 text-lg bg-black/30 text-white placeholder-cyan-200 placeholder-opacity-70 border border-cyan-500 border-opacity-30 focus:outline-none focus:border-opacity-100"
           placeholder="Enter your string..."
         />
         <button
@@ -52,7 +52,7 @@ const StringCalculator = () => {
         {result !== null && (
           <div
             data-testid="results"
-            className="mt-6 p-4 bg-black bg-opacity-30 rounded-lg border border-cyan-500 border-opacity-30"
+            className="mt-6 p-4 bg-black/30 rounded-lg border border-cyan-500 border-opacity-30"
           >
             <h2 className="text-2xl font-semibold text-cyan-100 mb-2">
               Result:
