@@ -18,6 +18,8 @@ const StringCalculator = () => {
 
   const handleCalculate = () => {
     try {
+      setResult(null);
+
       const result = add(input);
 
       setResult(result);

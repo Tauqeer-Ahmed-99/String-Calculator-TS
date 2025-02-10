@@ -1,15 +1,14 @@
+import {
+  convertStringNumbersToActualNumbers,
+  splitByCustomDelimiters,
+} from "./helpers";
+
 export const add = (numbers: string) => {
   if (numbers === "") return 0;
 
-  const numbersToAdd = numbers.split(",");
+  const stringNumsToAdd = splitByCustomDelimiters(numbers);
 
-  return numbersToAdd.reduce((prevVal, currVal) => {
-    const val = parseInt(currVal.trim());
+  const actualNumbers = convertStringNumbersToActualNumbers(stringNumsToAdd);
 
-    if (isNaN(val)) {
-      throw new Error("Given String Contains a NaN value.");
-    }
-
-    return prevVal + val;
-  }, 0);
+  return actualNumbers.reduce((prevVal, currVal) => prevVal + currVal, 0);
 };

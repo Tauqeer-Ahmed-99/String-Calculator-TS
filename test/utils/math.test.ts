@@ -15,7 +15,9 @@ describe("Math Test Suite", () => {
   it("Should throw an error if string contains non-numeric value", () => {
     const data = "1,2,a";
 
-    expect(() => add(data)).toThrowError("Given String Contains a NaN value.");
+    expect(() => add(data)).toThrowError(
+      "Given String Contains a NaN value 'a'."
+    );
   });
 
   it("Should return 0 if empty string is provided", () => {
