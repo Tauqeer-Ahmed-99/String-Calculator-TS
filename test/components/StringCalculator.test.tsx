@@ -15,4 +15,25 @@ describe("String Calculator UI Test Suite", () => {
     // 3. Assert the results
     expect(screen.getByTestId("main-heading")).toBeInTheDocument();
   });
+
+  it("Should have an input field with placeholder 'Enter your string...' and Initial Value empty string.", () => {
+    render(<StringCalculator />);
+
+    expect(screen.getByTestId("main-input")).toBeInTheDocument();
+    expect(screen.getByTestId("main-input")).toHaveAttribute(
+      "placeholder",
+      "Enter your stting..."
+    );
+    expect(screen.getByTestId("main-input")).toHaveAttribute("value", "");
+  });
+
+  it("Should have a button with text 'Calculate' and not disabled.", () => {
+    render(<StringCalculator />);
+
+    expect(screen.getByTestId("calculate-btn")).toBeInTheDocument();
+    expect(screen.getByTestId("calculate-btn")).toHaveAttribute(
+      "disabled",
+      false
+    );
+  });
 });
