@@ -50,13 +50,13 @@ yarn test  # or npm test
  ├── 📂 utils
  │    ├── helpers.ts  # Core logic for string splitting
  │    ├── math.ts  # core logic for math addition function
+ ├── 📄 App.tsx  # Main app entry point
 📂 test
  ├── 📂 components
  │    ├── StringCalculator.test.tsx  # Tests logic for UI component
  ├── 📂 utils
  │    ├── helpers.test.ts  # Tests logic for string splitting
  │    ├── math.test.ts  # Tests logic for math addition function
- ├── 📄 App.tsx  # Main app entry point
 ```
 
 ## Example Inputs & Outputs
