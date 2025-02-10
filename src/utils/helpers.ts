@@ -7,22 +7,32 @@ export const splitByCustomDelimiters = (text: string): string[] => {
   if (userProvidedDelimiter) {
     text = text.replace(`//${userProvidedDelimiter}\n`, ""); // remove delimiter with starting chars and linebreak
 
-    // Chars like - ^ $ * + ? . ( ) | [ ] { } has special meanings in reg exp
-    // therefore need to escape them if using as delimiter
-    // Escape special characters in the custom delimiter
-    const escapedDelimiter = userProvidedDelimiter.replace(
-      /[-\/\\^$*+?.()|[\]{}]/g,
-      "\\$&"
-    );
+    const delimeters = getFormattedDelimeters(userProvidedDelimiter);
 
     return removeEmptyItems(
-      text.split(new RegExp(DEFAULT_DELIMITERS + "|" + escapedDelimiter)) // delimiters are separated with |
+      text.split(new RegExp(DEFAULT_DELIMITERS + "|" + delimeters.join("|"))) // delimiters are separated with |
     ) as string[];
   }
 
   return removeEmptyItems(
     text.split(new RegExp(DEFAULT_DELIMITERS))
   ) as string[];
+};
+
+export const getFormattedDelimeters = (userProvidedDelimiter: string) => {
+  // Extract multiple delimiters from format "//[delim1][delim2]\n"
+  const delimiters = userProvidedDelimiter
+    .match(/\[([^\]]+)\]/g)
+    ?.map((d) => d.slice(1, -1)) || [userProvidedDelimiter];
+
+  // Chars like - ^ $ * + ? . ( ) | [ ] { } has special meanings in reg exp
+  // therefore need to escape them if using as delimiter
+  // Escape special characters in the custom delimiter
+  const escapedDelimiter = delimiters.map((delimeter) => {
+    return delimeter.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+  });
+
+  return escapedDelimiter;
 };
 
 export const getUserProvidedDelimiter = (text: string) => {
