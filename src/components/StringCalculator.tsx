@@ -41,9 +41,8 @@ const StringCalculator = () => {
         String Calculator
       </h1>
       <div className="w-full max-w-md">
-        <input
+        <textarea
           data-testid="main-input"
-          type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           className="w-full px-4 py-2 rounded-lg mb-4 text-lg bg-black/30 text-white placeholder-cyan-200 placeholder-opacity-70 border border-cyan-500 border-opacity-30 focus:outline-none focus:border-opacity-100"

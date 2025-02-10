@@ -27,7 +27,7 @@ describe("String Calculator UI Test Suite", () => {
       "placeholder",
       "Enter your string..."
     );
-    expect(screen.getByTestId("main-input")).toHaveAttribute("value", "");
+    expect(screen.getByTestId("main-input")).toHaveValue("");
   });
 
   it("Should have a button with text 'Calculate' and not disabled.", () => {
