@@ -58,7 +58,9 @@ const StringCalculator = () => {
           Calculate
         </button>
         {result !== null && <DisplayCard type="Result" data={result} />}
-        {error !== null && <DisplayCard type="Error" data={error} />}
+        {error !== null && result === null && (
+          <DisplayCard type="Error" data={error} />
+        )}
       </div>
     </div>
   );

@@ -40,7 +40,7 @@ describe("String Calculator UI Test Suite", () => {
   it("Should not have Result section visible by default.", () => {
     render(<StringCalculator />);
 
-    expect(screen.queryByTestId("results")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("Result")).not.toBeInTheDocument();
   });
 
   it("Should have visble Result section after clicking Calculate Button.", () => {
@@ -49,6 +49,6 @@ describe("String Calculator UI Test Suite", () => {
     const calculateButton = screen.getByText("Calculate");
     fireEvent.click(calculateButton);
 
-    expect(screen.getByTestId("results")).toBeInTheDocument();
+    expect(screen.getByTestId("Result")).toBeInTheDocument();
   });
 });
