@@ -1,7 +1,24 @@
 export const splitByCustomDelimiters = (text: string) => {
-  const delimiters = new RegExp(/[ ,\n]/); // add new delimiters here if needed
+  const delimiters = ",|\n";
 
-  return text.split(delimiters);
+  const userProvidedDelimiter = getUserProvidedDelimiter(text);
+
+  if (userProvidedDelimiter) {
+    text = text.replace(`//${userProvidedDelimiter}`, "");
+    return removeEmptyChars(
+      text.split(new RegExp(delimiters + "|" + userProvidedDelimiter)) // delimiters are separated with |
+    );
+  }
+
+  return removeEmptyChars(text.split(new RegExp(delimiters)));
+};
+
+export const removeEmptyChars = (strNumArr: string[]) => {
+  return strNumArr.filter((strNum) => strNum);
+};
+
+export const getUserProvidedDelimiter = (text: string) => {
+  return text.startsWith("//") ? text.charAt(2) : null; // char after '//' is delimiter
 };
 
 export const convertStringNumbersToActualNumbers = (numbers: string[]) => {
