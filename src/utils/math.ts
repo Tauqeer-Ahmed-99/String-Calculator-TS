@@ -1,3 +1,13 @@
 export const add = (numbers: string) => {
-  return 0;
+  const numbersToAdd = numbers.split(",");
+
+  return numbersToAdd.reduce((prevVal, currVal) => {
+    const val = parseInt(currVal);
+
+    if (isNaN(val)) {
+      throw new Error("Given String Contains a NaN value.");
+    }
+
+    return prevVal + val;
+  }, 0);
 };
