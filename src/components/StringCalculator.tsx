@@ -39,7 +39,7 @@ const StringCalculator = () => {
         data-testid="main-heading"
         className="text-4xl font-bold mb-8 text-cyan-100"
       >
-        String Calculator
+        String Calculator (Extended Version)
       </h1>
       <div className="w-full max-w-md">
         <textarea

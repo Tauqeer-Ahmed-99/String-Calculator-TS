@@ -15,7 +15,7 @@ describe("String Calculator UI Test Suite", () => {
     // 3. Assert the results
     expect(screen.getByTestId("main-heading")).toBeInTheDocument();
     expect(screen.getByTestId("main-heading")).toHaveTextContent(
-      "String Calculator"
+      "String Calculator (Extended Version)"
     );
   });
 
