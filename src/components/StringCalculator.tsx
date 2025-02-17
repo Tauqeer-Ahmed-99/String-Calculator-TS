@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { add } from "../utils/math";
+import { calculate } from "../utils/math";
 import DisplayCard from "./DisplayCard";
 
 const StringCalculator = () => {
@@ -20,7 +20,7 @@ const StringCalculator = () => {
     try {
       setResult(null);
 
-      const result = add(input);
+      const result = calculate(input);
 
       setResult(result);
     } catch (error) {
